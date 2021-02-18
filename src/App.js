@@ -1,26 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
+import { ListItem } from './ListItem.js';
+import { useState, useRef } from 'react';
+import { Board } from './Board.js';
+
 
 function App() {
+  const [myList, changeList] = useState([]);
+  const inputRef = useRef(null);
+
+
+  function onClickButton() {
+    const userText = inputRef.current.value;
+    changeList(prevList => [...prevList, userText]);
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <p>Neel Patel</p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+    
+      <Board/>
     </div>
   );
 }
 
 export default App;
+
+
+// <h1>My favourites</h1>
+// <input ref={inputRef} type= "text"/>
+// <button onClick={onClickButton}>Add to list</button>
+//   <ul>
+//     {myList.map(item => <ListItem name ={item}/>)}
+//   </ul>
