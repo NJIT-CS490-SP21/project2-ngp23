@@ -4,10 +4,17 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    margin: 25%;
+    position:absolute;
+    left:25%;
+    top:25%;
+    transform:transalate(-50%,-50%);
+   
 }
 
 .box {
-    border: 1px solid black;
+    border: 2px solid black;
     text-align: center;
+    font-size:15px;
+    
+    
 }
