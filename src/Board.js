@@ -11,6 +11,8 @@ export function Board() {
     const [board, setBoard] = useState(Array(9).fill(null));
     //const to checl the state.
     const [state2, setState2] = useState(1);
+    
+
     //onclick button function
     function onClickButton(index) {
         //variable to store the targer innerHtml

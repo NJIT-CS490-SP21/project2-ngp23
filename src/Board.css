@@ -8,13 +8,15 @@
     left:25%;
     top:25%;
     transform:transalate(-50%,-50%);
+    font-size:60px;
+    text-align: center
    
 }
 
 .box {
     border: 2px solid black;
-    text-align: center;
-    font-size:15px;
+    ;
+    
     
     
 }
