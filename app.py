@@ -43,7 +43,15 @@ def on_click(data): # data is whatever arg you pass in your emit call on client
     # This emits the 'chat' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
     socketio.emit('click', data, broadcast=True, include_self=False)
-
+@socketio.on('login')
+def on_login(data): # data is whatever arg you pass in your emit call on client
+    print(str(data))
+    global userList 
+    userList=[]
+    userList.append(data)
+    # This emits the 'chat' event from the server to all clients except for
+    # the client that emmitted the event that triggered this function
+    socketio.emit('login', data, broadcast=True, include_self=False)
 # Note that we don't call app.run anymore. We call socketio.run with app arg
 socketio.run(
     app,

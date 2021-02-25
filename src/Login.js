@@ -2,19 +2,14 @@ import React from 'react';
 import {ListItem} from './ListItem';
 import {useState, useRef} from 'react';
 
-export function Login()
+export function Login({login})
 {
-    const [myList,changeList]=useState([]);
+    let user = useRef(null);
     return (
         <div>
-        <h1>Welcome to tictactoe</h1>
-           <input type="text"/>
-           <button>Enter Player1</button>
-           
+            <input ref = {user} type="text"/>
+            <button onClick= {()=>login(user.current.value)}>Click</button>
         </div>
-        
-        
-        
         );
 
 }
