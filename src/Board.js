@@ -64,13 +64,20 @@ export function Board() {
     }
     const reset=()=>
     {
-        setBoard(board.map((item)=>item=""))
+        let userClick;
+        userClick = [...board];
+        userClick.fill(null);
+        setBoard(userClick);
+        socket.emit('click', { userClick: userClick,setState2:state2});
+        
     }
+
+
     return (
         //renders to the BoardMake.js 
         <div>
         <div>{status}</div>
-        <div><button onClick={reset} type="button">reset</button></div>
+        <div class ="button"><button onClick={reset} type="button">reset</button></div>
         <div class="board">
         {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}
         </div>
@@ -90,11 +97,11 @@ export function Board() {
          [2, 5, 8],
          [0, 4, 8],
          [2, 4, 6]];
-         console.log(board);
+         
          for(let i =0;i<winningLines.length;i++)
          {
              const[a,b,c]=winningLines[i];
-             if(board[a]&&board[a] === board[b]&&board[a]===board[c])
+             if(board[a] &&board[a] === board[b]&&board[a]===board[c])
              {
                  return board[a];
              }

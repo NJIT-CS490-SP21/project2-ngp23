@@ -11,13 +11,16 @@ const socket = io(); // Connects to socket connection
 function App() {
   const [log,islog]=useState(false);
   const [user,setUser]=useState();
+  
+  let username;
   const login = (username)=>{
+    username=username;
     setUser(username)
     islog(!log)
     socket.emit('login',{setUser:username});
   }
-      useEffect(() => {
 
+      useEffect(() => {
       socket.on('login', (login) => {
       console.log('A Player has logged in!');
       console.log(login);
@@ -25,17 +28,20 @@ function App() {
     });
   }, []);
  
-  if(log){
+  if(log && user!=""){
       return (
         <div>
+          <div>
           <Board />
-          {user}
+        </div>
+
         </div>
       );
     }
     else{
       return (
         <div>
+          <h1>Enter the username:</h1>
           <Login login = {login}/>
         </div>
       );
