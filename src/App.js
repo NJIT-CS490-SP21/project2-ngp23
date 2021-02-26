@@ -10,12 +10,13 @@ const socket = io(); // Connects to socket connection
 
 function App() {
   const [log,islog]=useState(false);
-  const [user,setUser]=useState();
+  const [user,setUser]=useState([]);
+  const [tempUser,tempSetUser]=useState("");
   
   let username;
   const login = (username)=>{
     username=username;
-    setUser(username)
+    tempSetUser(username)
     islog(!log)
     socket.emit('login',{setUser:username});
   }
@@ -24,14 +25,16 @@ function App() {
       socket.on('login', (login) => {
       console.log('A Player has logged in!');
       console.log(login);
-      setUser(...login.setUser)
+      setUser(login)
     });
   }, []);
  
-  if(log && user!=""){
+  if(log && tempUser!=""){
       return (
-        <div>
+        <div >
           <div>
+          <h1 class = "txt">Player is </h1>
+         {user.map((item) => <p class="txt"> {item}</p>)}
           <Board />
         </div>
 
@@ -40,9 +43,12 @@ function App() {
     }
     else{
       return (
-        <div>
-          <h1>Enter the username:</h1>
+       
+        <div >
+       
+          <h1 class="txtCenter">Enter the username:</h1>
           <Login login = {login}/>
+        
         </div>
       );
     }

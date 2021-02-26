@@ -6,7 +6,7 @@ from flask_cors import CORS
 app = Flask(__name__, static_folder='./build/static')
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
+userList=[]
 socketio = SocketIO(
     app,
     cors_allowed_origins="*",
@@ -52,10 +52,7 @@ def on_reset(data): # data is whatever arg you pass in your emit call on client
 @socketio.on('login')
 def on_login(data): # data is whatever arg you pass in your emit call on client
     print(str(data))
-    global userList 
-    userList=[]
-    userList.append(data)
-    
+    userList.append(data["setUser"])
     # This emits the 'chat' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
     socketio.emit('login', userList, broadcast=True, include_self=False)

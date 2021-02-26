@@ -10,6 +10,7 @@
     transform:transalate(-50%,-50%);
     font-size:60px;
     text-align: center
+    
    
 }
 
@@ -18,13 +19,21 @@
 }
 button
 {
+    background-color:lightblue;
      left:25%;
     top:25%;  
 }
 .txt
 {
-    left:25%;
-    top:25%;
+text-align:right;
+}
+.txtCenter
+{
+    text-align:center;
+}
+.background
+{
+    background-color:lightgreen;
 }
     
 
