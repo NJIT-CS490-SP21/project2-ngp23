@@ -51,6 +51,7 @@ export function Board() {
     });
   }, []);
   
+  
     let status;
     const winner = calculateWinner(board);
     
@@ -77,9 +78,9 @@ export function Board() {
         //renders to the BoardMake.js 
         
         <div>
-        <div>{status}</div>
+        <div class ="txtNext" >{status}</div>
         <center>
-        <div class ="button"><button onClick={reset} type="button">reset</button></div>
+        <div ><button class ="buttonR" onClick={reset} type="button">reset</button></div>
         <div class="board">
         {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}
         </div>

@@ -8,10 +8,10 @@ export function Login({login})
     let user = useRef(null);
     return (
         <div>
-        <center>
+       <center>
             <input ref = {user} type="text"/>
-            <button onClick= {()=>login(user.current.value)}>Click</button>
-        </center>
+            <button onClick= {()=>login(user.current.value)}>Enter</button>
+       </center>
         </div>
         );
 

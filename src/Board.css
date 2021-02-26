@@ -17,23 +17,32 @@
 .box {
     border: 2px solid black;
 }
-button
+.buttonR
 {
-    background-color:lightblue;
-     left:25%;
-    top:25%;  
+    height:35px;
+    width:100px;
+    margin-top:45%;
+    color:white;
+    font-size:15px;
+    background-color:black;
+
 }
 .txt
 {
 text-align:right;
 }
-.txtCenter
+.txtNext
 {
-    text-align:center;
+    margin-left:5%;
+    font-weight:bold;
 }
 .background
 {
     background-color:lightgreen;
+}
+.txtCenter
+{
+text-align:center;
 }
     
 
