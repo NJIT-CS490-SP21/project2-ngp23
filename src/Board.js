@@ -4,11 +4,13 @@ import './Board.css';
 import { useState, useRef, useEffect,dispatch } from 'react';
 import { BoardMake } from './BoardMake.js'
 import io from 'socket.io-client';
+import { Winner } from './Winner.js'
 
 const socket = io(); // Connects to socket connection
 export function Board() {
     //setup the state
     const [board, setBoard] = useState(Array(9).fill(null));
+    let [user, setUser] = useState({ "X": "", "O": "", "spec": [] })
     //const to checl the state.
     const [state2, setState2] = useState(1);
     
@@ -49,11 +51,22 @@ export function Board() {
       }else{setState2(0);}
       
     });
+      socket.on('login', (login) => {
+      console.log('A Player has logged in!');
+      console.log(login);
+      Object.keys(login).map((item) => {
+                console.log(item, login[item])
+               setUser((prev) => ({
+                    ...prev,
+                    [item]: login[item]
+                }))
+            })
+    });
   }, []);
   
   
     let status;
-    const winner = calculateWinner(board);
+    const winner = Winner(board);
     
     if(winner)
     {
@@ -63,6 +76,8 @@ export function Board() {
     {
         status= `Next Player: ${(state2 === 1)?"X":"O"}`;
     }
+
+
     const reset=()=>
     {
         let userClick;
@@ -73,13 +88,20 @@ export function Board() {
         
     }
 
-
+// <p class ="txtNext" >{status}<br/></p>
     return (
         //renders to the BoardMake.js 
         
         <div>
         <p class ="txtNext" >{status}<br/></p>
         <div ><button class ="buttonR" onClick={reset} type="button">reset</button></div>
+        <h1 class = "txt">Player is </h1>
+        <div class = "txt">
+        <p>Player X is : {user["X"]}</p>
+        <p>Player O is : {user["O"]}</p>
+        <p>Spectators</p>
+          {user['spec'].map((player, i) => <p>{player}</p>)}
+        </div>
         <div class="board">
         {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}
         </div>
@@ -88,27 +110,4 @@ export function Board() {
     
     
     
-    function calculateWinner(board)
-    {
-        const winningLines =  
-         [ [0, 1, 2],
-         [3, 4, 5],
-         [6, 7, 8],
-         [0, 3, 6],
-         [1, 4, 7],
-         [2, 5, 8],
-         [0, 4, 8],
-         [2, 4, 6]];
-         
-         for(let i =0;i<winningLines.length;i++)
-         {
-             const[a,b,c]=winningLines[i];
-             if(board[a] &&board[a] === board[b]&&board[a]===board[c])
-             {
-                 return board[a];
-             }
-         }
-         return null;
-        
-    }
 }

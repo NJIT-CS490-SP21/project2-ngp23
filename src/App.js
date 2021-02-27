@@ -11,7 +11,7 @@ const socket = io(); // Connects to socket connection
 function App() {
   const [log,islog]=useState(false);
   //const [user,setUser]=useState({});
-  let [user, setUser] = useState({ "X": "", "O": "", "spec": [] })
+  //let [user, setUser] = useState({ "X": "", "O": "", "spec": [] })
   const [tempUser,tempSetUser]=useState("");
   
   const login = (username)=>{
@@ -20,32 +20,12 @@ function App() {
     socket.emit('login',{setUser:username});
   }
 
-  useEffect(() => {
-      socket.on('login', (login) => {
-      console.log('A Player has logged in!');
-      console.log(login);
-      Object.keys(login).map((item) => {
-                console.log(item, login[item])
-               setUser((prev) => ({
-                    ...prev,
-                    [item]: login[item]
-                }))
-            })
-    });
-  }, []);
+  
  
   if(log && tempUser!=""){
       return (
         <div >
-          <h1 class = "txt">Player is </h1>
-          <div class = "txt">
-          <p>Player X is : {user["X"]}</p>
-          <p>Player O is : {user["O"]}</p>
-          <p>Spectators</p>
-          {user['spec'].map((player, i) => <p>{player}</p>)}
-        </div>
         <Board />
-        
         </div>
       );
     }
