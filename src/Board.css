@@ -10,8 +10,7 @@
     transform:transalate(-50%,-50%);
     font-size:60px;
     text-align: center
-    
-   
+
 }
 
 .box {
@@ -21,7 +20,6 @@
 {
     height:35px;
     width:100px;
-    margin-top:45%;
     color:white;
     font-size:15px;
     background-color:black;
@@ -33,7 +31,6 @@ text-align:right;
 }
 .txtNext
 {
-    margin-left:5%;
     font-weight:bold;
 }
 .background

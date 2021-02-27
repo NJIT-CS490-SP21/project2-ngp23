@@ -60,9 +60,9 @@ def on_login(data): # data is whatever arg you pass in your emit call on client
     elif "O" not in userNames:
         userNames["O"] = data["setUser"]
     else:
-        #userList.append(data["setUser"])
-        #userNames["Spectator"] = userList
-        userNames[data["setUser"]]=data["setUser"]
+        userList.append(data["setUser"])
+        userNames["spec"]=userList
+    print(userNames)
     socketio.emit('login', userNames, broadcast=True, include_self=False)
     # This emits the 'chat' event from the server to all clients except for
     # the client that emmitted the event that triggered this function

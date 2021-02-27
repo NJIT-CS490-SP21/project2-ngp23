@@ -78,13 +78,11 @@ export function Board() {
         //renders to the BoardMake.js 
         
         <div>
-        <div class ="txtNext" >{status}</div>
-        <center>
+        <p class ="txtNext" >{status}<br/></p>
         <div ><button class ="buttonR" onClick={reset} type="button">reset</button></div>
         <div class="board">
         {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}
         </div>
-        </center>
         </div>
         );
     
