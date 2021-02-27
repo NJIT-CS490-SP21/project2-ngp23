@@ -10,8 +10,7 @@ const socket = io(); // Connects to socket connection
 
 function App() {
   const [log,islog]=useState(false);
-  //const [user,setUser]=useState({});
-  //let [user, setUser] = useState({ "X": "", "O": "", "spec": [] })
+
   const [tempUser,tempSetUser]=useState("");
   
   const login = (username)=>{
@@ -20,12 +19,10 @@ function App() {
     socket.emit('login',{setUser:username});
   }
 
-  
- 
   if(log && tempUser!=""){
       return (
         <div >
-        <Board />
+        <Board tempUser={tempUser}/>
         </div>
       );
     }

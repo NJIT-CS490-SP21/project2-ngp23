@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import { Winner } from './Winner.js'
 
 const socket = io(); // Connects to socket connection
-export function Board() {
+export function Board({tempUser}) {
     //setup the state
     const [board, setBoard] = useState(Array(9).fill(null));
     let [user, setUser] = useState({ "X": "", "O": "", "spec": [] })
@@ -22,21 +22,34 @@ export function Board() {
         userClick=[...board];
         //If statement checks if the box is empty or not if empty then only procide.
         if (!userClick[index]) {
+            if(tempUser === user["X"]){
             //if state is 1 then its gives X as value
             if (state2 === 1) {
                userClick[index] = "X";
                 //changes the state to 0 for the O in next box
                 setState2(0);
+                setBoard(userClick);
+        socket.emit('click', { userClick: userClick,setState2:state2});
             }
-            else {
+            else{alert("wait for your turn")}
+                
+            }
+            else if(tempUser===user["O"]){
                 //O value is printed out
+                if(state2===0){
                 userClick [index] = "O";
                 //changes the state to 1 for the x in next box
                 setState2(1);
-            }
-        }
-        setBoard(userClick);
+                setBoard(userClick);
         socket.emit('click', { userClick: userClick,setState2:state2});
+                }else{alert("wait for your turn")}
+            } 
+                    
+            else{alert("Game in progress!")}
+        
+          
+        } else{alert("Invalid box")}
+
        
     }
 
@@ -77,18 +90,18 @@ export function Board() {
         status= `Next Player: ${(state2 === 1)?"X":"O"}`;
     }
 
-
     const reset=()=>
     {
         let userClick;
         userClick = [...board];
         userClick.fill(null);
         setBoard(userClick);
+        if(state2===0){
+        setState2(1);
+      }else{setState2(0);}
         socket.emit('click', { userClick: userClick,setState2:state2});
-        
     }
 
-// <p class ="txtNext" >{status}<br/></p>
     return (
         //renders to the BoardMake.js 
         
