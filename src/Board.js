@@ -75,6 +75,16 @@ export function Board({tempUser}) {
                 }))
             })
     });
+        socket.on('reset', (data) => {
+      console.log('rest event received!');
+      console.log(data);
+      
+      setBoard([...data.userClick]);
+      if(data.setState2===0){
+        setState2(1);
+      }else{setState2(0);}
+      
+    });
   }, []);
   
   
@@ -97,9 +107,9 @@ export function Board({tempUser}) {
         userClick.fill(null);
         setBoard(userClick);
         if(state2===0){
-        setState2(1);
+            setState2(1);
       }else{setState2(0);}
-        socket.emit('click', { userClick: userClick,setState2:state2});
+        socket.emit('reset', { userClick: userClick,setState2:state2});
     }
 
     return (

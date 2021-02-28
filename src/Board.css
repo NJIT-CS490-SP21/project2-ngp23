@@ -9,12 +9,13 @@
     top:25%;
     transform:transalate(-50%,-50%);
     font-size:60px;
-    text-align: center
+    text-align: center;
 
 }
 
 .box {
     border: 2px solid black;
+
 }
 .buttonR
 {
@@ -32,6 +33,8 @@ text-align:right;
 .txtNext
 {
     font-weight:bold;
+    text-align:center;
+    font-size:25px;
 }
 .background
 {
@@ -39,7 +42,7 @@ text-align:right;
 }
 .txtCenter
 {
-text-align:center;
+    text-align:center;
 }
     
 

@@ -9,34 +9,33 @@ import {Login} from './Login.js';
 const socket = io(); // Connects to socket connection
 
 function App() {
-  const [log,islog]=useState(false);
+  const [login,islogin]=useState(false);
 
   const [tempUser,tempSetUser]=useState("");
   
-  const login = (username)=>{
+  const tempLogin = (username)=>{
     tempSetUser(username)
-    islog((log)=>{return !log;})
+    islogin((login)=>{return !login;})
     socket.emit('login',{setUser:username});
   }
-
-  if(log && tempUser!=""){
-      return (
+      if(!login && tempUser == "")
+      {
+        return (
         <div >
+          <h1 class="txtCenter">Enter the username:</h1>
+          <Login login = {tempLogin}/>
+        </div>
+      );
+      }else
+      {
+        return (
+        <div >
+        <p class = "txtNext">Your user Name is : {tempUser}</p>
         <Board tempUser={tempUser}/>
         </div>
       );
-    }
-    else{
-      return (
-       
-        <div >
-          <h1 class="txtCenter">Enter the username:</h1>
-          <Login login = {login}/>
-          
-        </div>
-      );
-    }
-  
+      }
+
 }
 
 export default App;
