@@ -114,11 +114,15 @@ export function Board({tempUser}) {
     let status;
     const winner = Winner(board);
     
-    if(winner)
+    if(winner && winner !='draw')
     {
         status = `winner is ${winner}`;
         
-    }else
+    }else if(winner && winner==='draw')
+    {
+        status = ` No winner game draw`;
+    }
+    else
     {
         status= `Next Player: ${(state2 === 1)?"X":"O"}`;
     }
