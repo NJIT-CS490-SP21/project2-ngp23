@@ -46,6 +46,8 @@
 ## What are at least 3 technical issues encountered with your prject? how did you fix them?
  - The technical issues I encountered with the project was while uploading to heroku. Heroku wasn't able to notice the Flask_SocketIO requirement from txt file. To fix this problem I run the command `pip install flask-socketio`.
  - Another problem I faced for this project was `pip freeze > requirements.txt` wasn’t adding all the needed libraries to the txt file which caused and error while uploading to the heroku. To fix the issue I had to run `pip freeze` in terminal and copy all the requirements and past it in `requirements.txt`
+ - There was glitch in AWS time to time which will prevent me from applying new changes. To fix this I had to restart the AWS instance.
+ - Few other issues I encourtered were connected with the reactjs where I was getting error map undefine and error with the socket IO which I was able to fix it with the help of the Google.
 
 ## What are known problem (Still existing), if any, with your project?
   - One of the known problem that still exists is once the winner is selected the user will be still able to access the board.
