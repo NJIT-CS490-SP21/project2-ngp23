@@ -21,7 +21,7 @@ export function Board({tempUser}) {
         let userClick
         userClick=[...board];
         //If statement checks if the box is empty or not if empty then only procide.
-        if (!userClick[index]) 
+        if (!userClick[index] ) 
         {
             if(tempUser === user["X"])
             {

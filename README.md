@@ -12,7 +12,10 @@
 ## User will need to install all the require libraries in order for project to work using the code bellow
   - npm install
   - pip install -r requirements.txt
-  
+  - pip install flask_socketio
+  - pip install flask_cors
+## setup
+  - Run `echo "DANGEROUSLY_DISABLE_HOST_CHECK=true" > .env.development.local` in the project directory
 ## Libraries needed to import for Milestone1
   - socket.io
   - Flask_Session
@@ -26,7 +29,7 @@
  - open new terminal 
  - cd into project directory
  - run `npm run start`
- - then preview the page
+ - then preview the web page in browser '/'
 
 ## Deploy to Heroku
  - Create a free account on heroku https://singup.heroku.com/login
@@ -44,19 +47,19 @@
  - Now app should open without any problem.
 
 ## What are at least 3 technical issues encountered with your prject? how did you fix them?
- - The technical issues I encountered with the project was while uploading to heroku. Heroku wasn't able to notice the Flask_SocketIO requirement from txt file. To fix this problem I run the command `pip install flask-socketio`.
+ - The technical issues I encountered with the project was while uploading to heroku. Heroku wasn't able to notice the Flask_SocketIO requirement from txt file. To fix this problem I run the command `pip install flask-socketio` in terminal.
  - Another problem I faced for this project was `pip freeze > requirements.txt` wasn’t adding all the needed libraries to the txt file which caused and error while uploading to the heroku. To fix the issue I had to run `pip freeze` in terminal and copy all the requirements and past it in `requirements.txt`
  - There was glitch in AWS time to time which will prevent me from applying new changes. To fix this I had to restart the AWS instance.
  - Few other issues I encourtered were connected with the reactjs where I was getting error map undefine and error with the socket IO which I was able to fix it with the help of the Google.
 
 ## What are known problem (Still existing), if any, with your project?
-  - One of the known problem that still exists is once the winner is selected the user will be still able to access the board.
+  - One of the known problem that still exists is once the winner is selected the user will still be able to access the board.
   - If any player leaves the game it wouldnt reset the player names.
   
 ## What would you do to improve you project in the future?
- - In project I would like to add the logout button so that any places wants to leave the game they can just press logout button and take out the player from the list and add spec to player list.
+ - In project I would like to add the logout button so that any player wants to leave the game they can just press logout button and take out the player from the list and add spec to player list.
  - Another imporovement I would like to make for this project is create rooms so that only people you share your room code can play with you.
- - I would also like and game with computer where if there is no player two user can play with computer.
+ - I would also like to add a computer game where if there is no player two user can play with computer.
  
  
  
