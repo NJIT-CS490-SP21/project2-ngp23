@@ -30,8 +30,8 @@ function App() {
       {
         return (
         <div >
-        <p class = "txtNext">Your user Name is : {tempUser}</p>
-        <Board tempUser={tempUser}/>
+          <p class = "txtNext">Your user Name is : {tempUser}</p>
+          <Board tempUser={tempUser}/>
         </div>
       );
       }

@@ -21,20 +21,24 @@ export function Board({tempUser}) {
         let userClick
         userClick=[...board];
         //If statement checks if the box is empty or not if empty then only procide.
-        if (!userClick[index]) {
-            if(tempUser === user["X"]){
-            //if state is 1 then its gives X as value
-            if (state2 === 1) {
-               userClick[index] = "X";
-                //changes the state to 0 for the O in next box
-                setState2(0);
-                setBoard(userClick);
-                socket.emit('click', { userClick: userClick,setState2:state2});
-            }
-            else{alert("wait for your turn")}
+        if (!userClick[index]) 
+        {
+            if(tempUser === user["X"])
+            {
+                //if state is 1 then its gives X as value
+                if (state2 === 1) 
+                {
+                   userClick[index] = "X";
+                    //changes the state to 0 for the O in next box
+                    setState2(0);
+                    setBoard(userClick);
+                    socket.emit('click', { userClick: userClick,setState2:state2});
+                }
+                else{alert("wait for your turn")}
                 
             }
-            else if(tempUser===user["O"]){
+            else if(tempUser===user["O"])
+            {
                 //O value is printed out
                 if(state2===0){
                 userClick [index] = "O";
@@ -55,20 +59,29 @@ export function Board({tempUser}) {
     }
 
     useEffect(() => {
-    socket.on('click', (data) => {
+    socket.on('click', (data) => 
+    {
       console.log('Click event received!');
       console.log(data);
       
       setBoard([...data.userClick]);
-      if(data.setState2===0){
+      if(data.setState2===0)
+      {
         setState2(1);
-      }else{setState2(0);}
+      }
+      else
+      {
+          setState2(0);
+          
+      }
       
     });
-      socket.on('login', (login) => {
+    socket.on('login', (login) => 
+    {
       console.log('A Player has logged in!');
       console.log(login);
-      Object.keys(login).map((item) => {
+      Object.keys(login).map((item) => 
+            {
                 console.log(item, login[item])
                setUser((prev) => ({
                     ...prev,
@@ -77,14 +90,20 @@ export function Board({tempUser}) {
             })
     });
      
-        socket.on('reset', (data) => {
+    socket.on('reset', (data) => {
       console.log('rest event received!');
       console.log(data);
      
       setBoard([...data.userClick]);
-      if(data.setState2===0){
+      if(data.setState2===0)
+      {
         setState2(1);
-      }else{setState2(0);}
+      }
+      else
+      {
+          setState2(0);
+          
+      }
         });
    
       
@@ -110,9 +129,15 @@ export function Board({tempUser}) {
         userClick = [...board];
         userClick.fill(null);
         setBoard(userClick);
-        if(state2===0){
+        if(state2===0)
+        {
             setState2(1);
-      }else{setState2(0);}
+        }
+        else
+        {
+            setState2(0);
+            
+        }
         socket.emit('reset', { userClick: userClick,setState2:state2});
     }
 
@@ -120,7 +145,7 @@ export function Board({tempUser}) {
         //renders to the BoardMake.js 
         
         <div>
-        <p class ="txtNext" >{status}<br/></p>
+            <p class ="txtNext" >{status}<br/></p>
         <div>
             <center>{tempUser==user["X"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
             <center>{tempUser==user["O"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
