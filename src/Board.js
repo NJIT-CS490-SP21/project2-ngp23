@@ -29,7 +29,7 @@ export function Board({tempUser}) {
                 //changes the state to 0 for the O in next box
                 setState2(0);
                 setBoard(userClick);
-        socket.emit('click', { userClick: userClick,setState2:state2});
+                socket.emit('click', { userClick: userClick,setState2:state2});
             }
             else{alert("wait for your turn")}
                 
@@ -41,8 +41,9 @@ export function Board({tempUser}) {
                 //changes the state to 1 for the x in next box
                 setState2(1);
                 setBoard(userClick);
-        socket.emit('click', { userClick: userClick,setState2:state2});
-                }else{alert("wait for your turn")}
+                socket.emit('click', { userClick: userClick,setState2:state2});
+                }
+                else{alert("wait for your turn")}
             } 
                     
             else{alert("Game in progress!")}
@@ -75,16 +76,19 @@ export function Board({tempUser}) {
                 }))
             })
     });
+     
         socket.on('reset', (data) => {
       console.log('rest event received!');
       console.log(data);
-      
+     
       setBoard([...data.userClick]);
       if(data.setState2===0){
         setState2(1);
       }else{setState2(0);}
+        });
+   
       
-    });
+   
   }, []);
   
   
@@ -117,20 +121,23 @@ export function Board({tempUser}) {
         
         <div>
         <p class ="txtNext" >{status}<br/></p>
-        <div ><button class ="buttonR" onClick={reset} type="button">reset</button></div>
-        <h1 class = "txt">Player is </h1>
+        <div>
+            <center>{tempUser==user["X"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
+            <center>{tempUser==user["O"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
+        </div>
+       
         <div class = "txt">
-        <p>Player X is : {user["X"]}</p>
-        <p>Player O is : {user["O"]}</p>
-        <p>Spectators</p>
-          {user['spec'].map((player, i) => <p>{player}</p>)}
+            <p class="txtplayer">Player X is : {user["X"]}</p>
+            <p class="txtplayer">Player O is : {user["O"]}</p>
+            <p>Spectators</p>
+            {user['spec'].map((player, i) => <p class="txtspec">{player}</p>)}
         </div>
+      
         <div class="board">
-        {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}
+            {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}
         </div>
+        
         </div>
         );
-    
-    
     
 }
