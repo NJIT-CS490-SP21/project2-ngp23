@@ -1,6 +1,6 @@
 # Project2-milestone_1
 
-#Tic Tac Toe
+# Tic Tac Toe
 ## Technology Used in this Milestone
   - We use the cloud 9 services on aws to priview and make updates on the file.
 
@@ -14,14 +14,9 @@
   - pip install -r requirements.txt
   - pip install flask_socketio
   - pip install flask_cors
+
 ## setup
   - Run `echo "DANGEROUSLY_DISABLE_HOST_CHECK=true" > .env.development.local` in the project directory
-## Libraries needed to import for Milestone1
-  - socket.io
-  - Flask_Session
-  - flask_socket.io
-  - Json
-  - render_template
 
 ## How to run the APP on the computer
  - cd into the directory
@@ -30,6 +25,12 @@
  - cd into project directory
  - run `npm run start`
  - then preview the web page in browser '/'
+
+## Libraries needed to import for Milestone1
+  - socket.io
+  - Flask_Session
+  - flask_socket.io
+  - reactJs
 
 ## Deploy to Heroku
  - Create a free account on heroku https://singup.heroku.com/login
@@ -53,9 +54,8 @@
  - Few other issues I encourtered were connected with the reactjs where I was getting error map undefine and error with the socket IO which I was able to fix it with the help of the Google.
 
 ## What are known problem (Still existing), if any, with your project?
-  - One of the known problem that still exists is once the winner is selected the user will still be able to access the board.
-  - If any player leaves the game it wouldnt reset the player names.
-  
+  - If any player leaves the game it wouldnt reset the player names. If had an extra time would have add logout button so that it resets the players.
+
 ## What would you do to improve you project in the future?
  - In project I would like to add the logout button so that any player wants to leave the game they can just press logout button and take out the player from the list and add spec to player list.
  - Another imporovement I would like to make for this project is create rooms so that only people you share your room code can play with you.

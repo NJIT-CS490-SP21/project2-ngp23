@@ -21,6 +21,7 @@ export function Board({tempUser}) {
         let userClick
         userClick=[...board];
         //If statement checks if the box is empty or not if empty then only procide.
+        if(Winner(board)){alert("Already one winner, reset the game to play.");return;}
         if (!userClick[index] ) 
         {
             if(tempUser === user["X"])
@@ -110,9 +111,9 @@ export function Board({tempUser}) {
    
   }, []);
   
-  
+  const winner = Winner(board);
     let status;
-    const winner = Winner(board);
+    
     
     if(winner && winner !='draw')
     {
