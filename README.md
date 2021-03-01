@@ -48,13 +48,15 @@
  - Now app should open without any problem.
 
 ## What are at least 3 technical issues encountered with your prject? how did you fix them?
- - The technical issues I encountered with the project was while uploading to heroku. Heroku wasn't able to notice the Flask_SocketIO requirement from txt file. To fix this problem I run the command `pip install flask-socketio` in terminal.
- - Another problem I faced for this project was `pip freeze > requirements.txt` wasn’t adding all the needed libraries to the txt file which caused and error while uploading to the heroku. To fix the issue I had to run `pip freeze` in terminal and copy all the requirements and past it in `requirements.txt`
+ - The technical issues I encountered with the project was while uploading to heroku. Heroku wasn't able to notice the Flask_SocketIO requirement from txt file. To fix this problem I run the command `pip install flask-socketio` in terminal. Was able to fix this problem from the slack channel.
+ - Another problem I faced for this project was `pip freeze > requirements.txt` wasn’t adding all the needed libraries to the txt file which caused and error while uploading to the heroku. To fix the issue I had to run `pip freeze` in terminal and copy all the requirements and past it in `requirements.txt` figured out on own
  - There was glitch in AWS time to time which will prevent me from applying new changes. To fix this I had to restart the AWS instance.
  - Few other issues I encourtered were connected with the reactjs where I was getting error map undefine and error with the socket IO which I was able to fix it with the help of the Google.
+ - Was having Issue with the draw function which I was able to fix it with the help of stack overflow.
 
 ## What are known problem (Still existing), if any, with your project?
   - If any player leaves the game it wouldnt reset the player names. If had an extra time would have add logout button so that it resets the players.
+  - Other known problem would be that there could be multiple players with the same name in the list which can cause confusion while giving an access. To fix this I would have created an some sort of an dictionary or list which avoids duplicate.
 
 ## What would you do to improve you project in the future?
  - In project I would like to add the logout button so that any player wants to leave the game they can just press logout button and take out the player from the list and add spec to player list.
