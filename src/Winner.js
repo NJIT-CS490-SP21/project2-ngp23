@@ -20,8 +20,9 @@ export function Winner(board)
              {
              return board[a];
              } 
-             else if(!board.includes(null)){return 'draw';}
+             
          }
-         return null;
+         if(!board.includes(null)){return 'draw';}else{
+         return null;}
          }
 

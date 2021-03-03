@@ -73,7 +73,6 @@ export function Board({tempUser}) {
       else
       {
           setState2(0);
-          
       }
       
     });
@@ -103,7 +102,6 @@ export function Board({tempUser}) {
       else
       {
           setState2(0);
-          
       }
         });
    
