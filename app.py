@@ -120,6 +120,20 @@ def on_login(data): # data is whatever arg you pass in your emit call on client
     #socketio.emit('login', userList, broadcast=True, include_self=False)
 
 # Note we need to add this line so we can import app in the python shell
+@socketio.on('resetStats')
+def resetStats(data):
+    winner = data["setWin"]
+    loser = data["setLose"]
+    print(winner)
+    print(loser)
+    db.session.query(models)\
+       .filter(models.Person.username == winner)\
+       .update({models.Person.money: models.Person.score + 1})
+    db.session.query(models)\
+       .filter(models.Person.username == loser)\
+       .update({models.Person.money: models.Person.score - 1})
+    db.session.commit()
+    
 if __name__ == "__main__":
 # Note that we don't call app.run anymore. We call socketio.run with app arg
     socketio.run(

@@ -10,8 +10,8 @@ const socket = io(); // Connects to socket connection
 
 function App() {
   const [login,islogin]=useState(false);
-
   const [tempUser,tempSetUser]=useState("");
+ 
   const tempLogin = (username)=>{
     tempSetUser(username)
     islogin((login)=>{return !login;})

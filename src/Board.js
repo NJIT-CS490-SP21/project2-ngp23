@@ -5,6 +5,7 @@ import { useState, useRef, useEffect,dispatch } from 'react';
 import { BoardMake } from './BoardMake.js'
 import io from 'socket.io-client';
 import { Winner } from './Winner.js'
+import {LeaderBoard} from './LeaderBoard.js'
 
 
 const socket = io(); // Connects to socket connection
@@ -18,7 +19,6 @@ export function Board({tempUser}) {
     const [win,setWinner]=useState("");
     const [check,setcheck]=useState(true);
     
-
     //onclick button function
     function onClickButton(index) {
         //variable to store the targer innerHtml
@@ -39,7 +39,8 @@ export function Board({tempUser}) {
                     setBoard(userClick);
                     socket.emit('click', { userClick: userClick,setState2:state2});
                 }
-                else{alert("wait for your turn")}
+                else{alert("wait for your turn")
+                  }
                 
             }
             else if(tempUser===user["O"])
@@ -52,7 +53,9 @@ export function Board({tempUser}) {
                 setBoard(userClick);
                 socket.emit('click', { userClick: userClick,setState2:state2});
                 }
-                else{alert("wait for your turn")}
+                else{
+                    alert("wait for your turn");
+                }
             } 
                     
             else{alert("Game in progress!")}
@@ -108,12 +111,6 @@ export function Board({tempUser}) {
           setState2(0);
       }
         });
-    
-    socket.on('leaderboard', (data) => {
-      console.log('leaderboard event received!');
-      console.log(data);
-      setLead(data);
-        });
         
         
 }, []);
@@ -121,11 +118,25 @@ export function Board({tempUser}) {
   const winner = Winner(board);
     let status;
     
-    
     if(winner && winner !='draw')
     {
+        let win;
+        let lose;
         status = `winner is ${winner}`;
-        
+        if("X"==winner)
+        {
+         win=user["X"];
+         lose=user["O"]
+         console.log( win);
+         console.log(lose);
+        }else
+        {
+         win=user["O"];
+         lose=user["X"]
+         console.log(win);
+         console.log(lose);
+        }
+        socket.emit("resetStats",{setWin:win,setLose:lose});
     }else if(winner && winner==='draw')
     {
         status = ` No winner game draw`;
@@ -157,6 +168,8 @@ export function Board({tempUser}) {
     return (
         //renders to the BoardMake.js 
         
+        
+        
         <div>
             <p class ="txtNext" >{status}<br/></p>
         <div>
@@ -164,7 +177,7 @@ export function Board({tempUser}) {
             <center>{tempUser==user["O"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
         </div>
         <div class = "txt">
-            <h2>Player username and score </h2>
+            <h2>Player username </h2>
             <p class="txtplayer">Player X is : {user["X"]}</p>
             <p class="txtplayer">Player O is : {user["O"]}</p>
             <p>Spectators</p>
@@ -172,18 +185,7 @@ export function Board({tempUser}) {
         </div>
         
         { check?
-        <div class="txtLeft">
-        <table>
-            <thead>
-                <tr>
-                   <th colspan="2">ScoreBoard</th>
-                   </tr>
-                   </thead>
-                   <tbody>
-                          {Object.keys(lead).map(keys => <tr><td> {keys}</td> <td>{lead[keys]}</td> </tr>)}
-                    </tbody>
-        </table>
-        </div>
+        <div><LeaderBoard/></div>
         :null
         }
         <button class= "hideButton"onClick={operation}>Hide</button>
