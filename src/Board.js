@@ -1,7 +1,7 @@
 //imports all needed libraries
 import React from 'react';
 import './Board.css';
-import { useState, useRef, useEffect,dispatch } from 'react';
+import { useState, useRef, useEffect} from 'react';
 import { BoardMake } from './BoardMake.js'
 import io from 'socket.io-client';
 import { Winner } from './Winner.js'
@@ -15,14 +15,15 @@ export function Board({tempUser}) {
     let [user, setUser] = useState({ "X": "", "O": "", "spec": [] })
     //const to checl the state.
     const [state2, setState2] = useState(1);
-    const [lead,setLead]=useState({});
-    const [win,setWinner]=useState("");
     const [check,setcheck]=useState(true);
-    
+
     //onclick button function
     function onClickButton(index) {
         //variable to store the targer innerHtml
+        
         let userClick
+        let win;
+        let lose;
         userClick=[...board];
         //If statement checks if the box is empty or not if empty then only procide.
         if(Winner(board)){alert("Already one winner, reset the game to play.");return;}
@@ -41,7 +42,7 @@ export function Board({tempUser}) {
                 }
                 else{alert("wait for your turn")
                   }
-                
+                    //socket.emit("resetStats",{setWin:win,setLose:lose});
             }
             else if(tempUser===user["O"])
             {
@@ -59,11 +60,30 @@ export function Board({tempUser}) {
             } 
                     
             else{alert("Game in progress!")}
-        
+                
           
-        } else{alert("Invalid box")}
-
-       
+        }
+        //else{alert("Invalid box")}
+            const winner = Winner(userClick);
+            console.log(winner)
+            if(winner){     
+            if("X"== winner)
+            {
+                 win=user["X"];
+                 lose=user["O"]
+                 console.log("Winner for X is "+win);
+                 console.log("Loose for X is "+lose);
+            }else
+            {
+                 win=user["O"];
+                 lose=user["X"]
+                 console.log("Winner for o is "+win);
+                 console.log("Loose for o is "+lose);
+            }
+            
+            }
+        socket.emit("resetStats",{setWin:win,setLose:lose});
+        
     }
 
     useEffect(() => {
@@ -111,32 +131,17 @@ export function Board({tempUser}) {
           setState2(0);
       }
         });
-        
+
         
 }, []);
   
-  const winner = Winner(board);
+    const winner = Winner(board);
     let status;
     
-    if(winner && winner !='draw')
+    if(winner && winner !=='draw')
     {
-        let win;
-        let lose;
         status = `winner is ${winner}`;
-        if("X"==winner)
-        {
-         win=user["X"];
-         lose=user["O"]
-         console.log( win);
-         console.log(lose);
-        }else
-        {
-         win=user["O"];
-         lose=user["X"]
-         console.log(win);
-         console.log(lose);
-        }
-        socket.emit("resetStats",{setWin:win,setLose:lose});
+        
     }else if(winner && winner==='draw')
     {
         status = ` No winner game draw`;
@@ -167,14 +172,11 @@ export function Board({tempUser}) {
 
     return (
         //renders to the BoardMake.js 
-        
-        
-        
         <div>
             <p class ="txtNext" >{status}<br/></p>
         <div>
-            <center>{tempUser==user["X"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
-            <center>{tempUser==user["O"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
+            <center>{tempUser===user["X"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
+            <center>{tempUser===user["O"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
         </div>
         <div class = "txt">
             <h2>Player username </h2>
@@ -185,7 +187,7 @@ export function Board({tempUser}) {
         </div>
         
         { check?
-        <div><LeaderBoard/></div>
+         <div><LeaderBoard/></div>
         :null
         }
         <button class= "hideButton"onClick={operation}>Hide</button>

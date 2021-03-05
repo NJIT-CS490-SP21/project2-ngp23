@@ -22,7 +22,7 @@ db.create_all()
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-userList=[]
+userList = []
 userNames = {}
 
 
@@ -62,7 +62,7 @@ def on_chat(data): # data is whatever arg you pass in your emit call on client
     print(str(data))
     # This emits the 'chat' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
-    socketio.emit('chat',  data, broadcast=True, include_self=False)
+    socketio.emit('chat', data, broadcast=True, include_self=False)
 @socketio.on('click')
 def on_click(data): # data is whatever arg you pass in your emit call on client
     print(str(data))
@@ -76,11 +76,10 @@ def on_reset(data): # data is whatever arg you pass in your emit call on client
     # the client that emmitted the event that triggered this function
     socketio.emit('reset', data, broadcast=True, include_self=False)
 #helper function
-def addToDb(data): # data is whatever arg you pass in your emit call on client
-    check = models.Person.query.filter_by(username=data["setUser"],score=100).first()
-    
-    if(check==None):
-        new_user = models.Person(username=data['setUser'], score=100)
+def add_db(data): # data is whatever arg you pass in your emit call on client
+    check = models.Person.query.filter_by(username=data["setUser"]).first()
+    if check is None:
+        new_user = models.Person(username=data["setUser"], score=100)
         print(str(data))
         db.session.add(new_user)
         db.session.commit()
@@ -88,31 +87,32 @@ def addToDb(data): # data is whatever arg you pass in your emit call on client
         users = []
         for person in all_people:
             users.append(person.username)
-   
-def scoreBoard():
-    scoreDict={}
-    score=models.Person.query.order_by(models.Person.score).all()
+def score_board():
+    scoreDict = {}
+    score = models.Person.query.order_by(models.Person.score).all()
     for s in score:
-        scoreDict[s.username]=s.score
-    print("score",scoreDict)
+        scoreDict[s.username] = s.score
+    print("score", scoreDict)
     return scoreDict
 
 @socketio.on('leaderboard')
 def leaderboard():
-    score=scoreBoard()
+    print("Hereeeeeeeeeeeeeeeee")
+    score = score_board()
+    print("checll score",score)
     socketio.emit('leaderboard', score, broadcast=True, include_self=False)
 
 @socketio.on('login')
 def on_login(data): # data is whatever arg you pass in your emit call on client
     print(str(data))
-    addToDb(data)
+    add_db(data)
     if "X" not in userNames:
         userNames["X"] = data["setUser"]
     elif "O" not in userNames:
         userNames["O"] = data["setUser"]
     else:
         userList.append(data["setUser"])
-        userNames["spec"]=userList
+        userNames["spec"] = userList
     print(userNames)
     socketio.emit('login', userNames, broadcast=True, include_self=False)
     # This emits the 'chat' event from the server to all clients except for
@@ -126,14 +126,16 @@ def resetStats(data):
     loser = data["setLose"]
     print(winner)
     print(loser)
-    db.session.query(models)\
-       .filter(models.Person.username == winner)\
-       .update({models.Person.money: models.Person.score + 1})
-    db.session.query(models)\
-       .filter(models.Person.username == loser)\
-       .update({models.Person.money: models.Person.score - 1})
-    db.session.commit()
     
+    db.session.query(models.Person)\
+       .filter(models.Person.username == winner)\
+       .update({models.Person.score: models.Person.score + 1})
+    db.session.query(models.Person)\
+       .filter(models.Person.username == loser)\
+       .update({models.Person.score: models.Person.score - 1})
+    db.session.commit()
+    score=score_board()
+    socketio.emit('resetStats', score, broadcast=True)
 if __name__ == "__main__":
 # Note that we don't call app.run anymore. We call socketio.run with app arg
     socketio.run(
@@ -141,5 +143,3 @@ if __name__ == "__main__":
         host=os.getenv('IP', '0.0.0.0'),
         port=8081 if os.getenv('C9_PORT') else int(os.getenv('PORT', 8081)),
     )
-
-

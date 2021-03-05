@@ -1,17 +1,23 @@
 import React from 'react';
 import './Board.css';
 import io from 'socket.io-client';
-import { useState, useRef, useEffect,dispatch } from 'react';
+import { useState, useRef, useEffect} from 'react';
 const socket = io(); // Connects to socket connection
 export function LeaderBoard()
 {
-    const [lead,setLead]=useState({});
-    socket.on('leaderboard', (data) => {
+    const [lead,setLead] = useState({});
+    useEffect(() => {
+    socket.on('resetStats', (data) => {
       console.log('leaderboard event received!');
       console.log(data);
       setLead(data);
         });
-    
+     socket.on('leaderboard', (data) => {
+      console.log('leaderboard event received!');
+      console.log(data);
+      setLead(data);
+        });
+    }, []);
     return (       
     <div class="txtLeft">
         <table>

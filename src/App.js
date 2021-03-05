@@ -15,10 +15,12 @@ function App() {
   const tempLogin = (username)=>{
     tempSetUser(username)
     islogin((login)=>{return !login;})
+    console.log(username);
     socket.emit('login',{setUser:username});
+    
     socket.emit('leaderboard');
   }
-      if(!login && tempUser == "")
+      if(!login && tempUser === "")
       {
         return (
         <div >
