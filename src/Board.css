@@ -32,10 +32,7 @@
     width:300px;
     margin:auto;
 }
-.txt
-{
-text-align:left;
-}
+
 .txtNext
 {
     font-weight:bold;
@@ -62,5 +59,24 @@ text-align:left;
     font-style:italic;
     font-family: Arial, Helvetica, sans-serif;
 }
-    
+.txtLeft
+{
+    margin-left: 1000px;
+    margin-top: -300px;
+}
+.hideButton
+{
+    margin-left: 900px;
+    margin-top: -300px;
+}
 
+table,
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}

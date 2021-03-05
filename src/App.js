@@ -12,11 +12,11 @@ function App() {
   const [login,islogin]=useState(false);
 
   const [tempUser,tempSetUser]=useState("");
-  
   const tempLogin = (username)=>{
     tempSetUser(username)
     islogin((login)=>{return !login;})
     socket.emit('login',{setUser:username});
+    socket.emit('leaderboard');
   }
       if(!login && tempUser == "")
       {

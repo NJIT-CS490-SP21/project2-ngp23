@@ -6,6 +6,7 @@ import { BoardMake } from './BoardMake.js'
 import io from 'socket.io-client';
 import { Winner } from './Winner.js'
 
+
 const socket = io(); // Connects to socket connection
 export function Board({tempUser}) {
     //setup the state
@@ -13,6 +14,9 @@ export function Board({tempUser}) {
     let [user, setUser] = useState({ "X": "", "O": "", "spec": [] })
     //const to checl the state.
     const [state2, setState2] = useState(1);
+    const [lead,setLead]=useState({});
+    const [win,setWinner]=useState("");
+    const [check,setcheck]=useState(true);
     
 
     //onclick button function
@@ -104,10 +108,15 @@ export function Board({tempUser}) {
           setState2(0);
       }
         });
-   
-      
-   
-  }, []);
+    
+    socket.on('leaderboard', (data) => {
+      console.log('leaderboard event received!');
+      console.log(data);
+      setLead(data);
+        });
+        
+        
+}, []);
   
   const winner = Winner(board);
     let status;
@@ -143,6 +152,7 @@ export function Board({tempUser}) {
         }
         socket.emit('reset', { userClick: userClick,setState2:state2});
     }
+    const operation=()=>{setcheck(!check)}
 
     return (
         //renders to the BoardMake.js 
@@ -153,14 +163,30 @@ export function Board({tempUser}) {
             <center>{tempUser==user["X"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
             <center>{tempUser==user["O"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
         </div>
-       
         <div class = "txt">
+            <h2>Player username and score </h2>
             <p class="txtplayer">Player X is : {user["X"]}</p>
             <p class="txtplayer">Player O is : {user["O"]}</p>
             <p>Spectators</p>
             {user['spec'].map((player, i) => <p class="txtspec">{player}</p>)}
         </div>
-      
+        
+        { check?
+        <div class="txtLeft">
+        <table>
+            <thead>
+                <tr>
+                   <th colspan="2">ScoreBoard</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                          {Object.keys(lead).map(keys => <tr><td> {keys}</td> <td>{lead[keys]}</td> </tr>)}
+                    </tbody>
+        </table>
+        </div>
+        :null
+        }
+        <button class= "hideButton"onClick={operation}>Hide</button>
         <div class="board">
             {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}
         </div>

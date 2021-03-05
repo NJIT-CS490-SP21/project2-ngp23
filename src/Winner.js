@@ -11,7 +11,6 @@ export function Winner(board)
          [2, 5, 8],
          [0, 4, 8],
          [2, 4, 6]];
-         
         
          for(let i =0;i<winningLines.length;i++)
          {

@@ -21,9 +21,11 @@ db.create_all()
 
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-userList=[]
 
+userList=[]
 userNames = {}
+
+
 socketio = SocketIO(
     app,
     cors_allowed_origins="*",
@@ -73,22 +75,37 @@ def on_reset(data): # data is whatever arg you pass in your emit call on client
     # This emits the 'chat' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
     socketio.emit('reset', data, broadcast=True, include_self=False)
-@socketio.on('join')
-def on_join(data): # data is whatever arg you pass in your emit call on client
-    print(str(data))
-    new_user = models.Person(username=data['user'], email='{0}@stuff.com'.format(data['user']))
-    db.session.add(new_user)
-    db.session.commit()
-    all_people = models.Person.query.all()
-    users = []
-    for person in all_people:
-        users.append(person.username)
-    socketio.emit('user_list', {'users': users})
+#helper function
+def addToDb(data): # data is whatever arg you pass in your emit call on client
+    check = models.Person.query.filter_by(username=data["setUser"],score=100).first()
     
+    if(check==None):
+        new_user = models.Person(username=data['setUser'], score=100)
+        print(str(data))
+        db.session.add(new_user)
+        db.session.commit()
+        all_people = models.Person.query.all()
+        users = []
+        for person in all_people:
+            users.append(person.username)
+   
+def scoreBoard():
+    scoreDict={}
+    score=models.Person.query.order_by(models.Person.score).all()
+    for s in score:
+        scoreDict[s.username]=s.score
+    print("score",scoreDict)
+    return scoreDict
+
+@socketio.on('leaderboard')
+def leaderboard():
+    score=scoreBoard()
+    socketio.emit('leaderboard', score, broadcast=True, include_self=False)
+
 @socketio.on('login')
 def on_login(data): # data is whatever arg you pass in your emit call on client
     print(str(data))
-    #userList.append(data["setUser"])
+    addToDb(data)
     if "X" not in userNames:
         userNames["X"] = data["setUser"]
     elif "O" not in userNames:
