@@ -138,14 +138,7 @@ export function Board({tempUser}) {
       console.log(data);
       setLead(data);
         });
-        
-    //  socket.on('leaderboard', (data) => {
-    //   console.log('leaderboard event received!');
-    //   console.log(data);
-    //   setLead(data);
-       // });
 
-        
 }, []);
   
     const winner = Winner(board);
@@ -192,20 +185,19 @@ export function Board({tempUser}) {
             <center>{tempUser===user["O"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
         </div>
         <div class = "txt">
-            <h2>Player username </h2>
+            <h2 class="txtplayer">Player username </h2>
             <p class="txtplayer">Player X is : {user["X"]}</p>
             <p class="txtplayer">Player O is : {user["O"]}</p>
-            <p>Spectators</p>
+            <p class= "txtspec">Spectators</p>
             {user['spec'].map((player, i) => <p class="txtspec">{player}</p>)}
         </div>
         
         <div>
          <button class= "hideButton"onClick={operation}>Hide</button>
         { check?
-         <div><LeaderBoard lead={lead}/></div>
+         <div><LeaderBoard lead={lead} tempUser={tempUser}/></div>
         :null
         }
-       
         </div>
         <div class="board">
             {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}

@@ -2,31 +2,23 @@ import React from 'react';
 import './Board.css';
 import io from 'socket.io-client';
 const socket = io(); // Connects to socket connection
-export function LeaderBoard({lead})
+export function LeaderBoard({lead,tempUser})
 {
-    console.log(lead)
-    // lead.map((item)=>{
-    //     Object.keys(item).map(keys => {
-    //         console.log(keys), console.log({item[keys]}
-    //         ) } ) } )
-    lead.map((item) =>{
-        Object.keys(item).map(score =>{
-            console.log(score)
-            console.log(item[score])
-        })
-    })        
     return (       
     <div class="txtLeft">
         <table>
             <thead>
                 <tr>
-                   <th colspan="2">ScoreBoard</th>
-                   </tr>
-                   </thead>
+                   <th colspan="2" class= "txtL">ScoreBoard</th>
+                </tr>
+            </thead>
                    <tbody>
-                   {lead.map((item)=>Object.keys(item).map(keys => <tr><td> {keys}</td> <td>{item[keys]}</td> </tr>))}
-                    </tbody>
+                    {lead.map((item)=>Object.keys(item).map(keys =>(tempUser===keys)?
+                        <tr><td class = "colortext"> {keys}</td> <td>{item[keys]}</td> </tr>:
+                        <tr><td> {keys}</td> <td>{item[keys]}</td> </tr>
+                        ))}
+                  </tbody>
         </table>
-        </div>
+    </div>
         )
 }
