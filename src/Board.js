@@ -67,7 +67,7 @@ export function Board({tempUser}) {
         //else{alert("Invalid box")}
             const winner = Winner(userClick);
             console.log(winner)
-            if(winner){     
+            if(winner&& winner!='draw'){     
             if("X"== winner)
             {
                  win=user["X"];
@@ -81,9 +81,9 @@ export function Board({tempUser}) {
                  console.log("Winner for o is "+win);
                  console.log("Loose for o is "+lose);
             }
-            
+            socket.emit("resetStats",{setWin:win,setLose:lose});
             }
-        socket.emit("resetStats",{setWin:win,setLose:lose});
+        
         
     }
 
