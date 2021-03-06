@@ -1,7 +1,7 @@
 import React from 'react';
 import './Board.css';
-import io from 'socket.io-client';
-const socket = io(); // Connects to socket connection
+//import io from 'socket.io-client';
+//const socket = io(); // Connects to socket connection
 export function LeaderBoard({lead,tempUser})
 {
     return (       
