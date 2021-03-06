@@ -79,26 +79,32 @@ def on_reset(data): # data is whatever arg you pass in your emit call on client
 #helper function
 def add_db(data): # data is whatever arg you pass in your emit call on client
     check = models.Person.query.filter_by(username=data["setUser"]).first()
-    print(check)
     if check is None:
         new_user = models.Person(username=data["setUser"], score=100)
-        print(new_user)
+        print(str(data))
         db.session.add(new_user)
         db.session.commit()
-
+        all_people = models.Person.query.all()
+        users = []
+        for person in all_people:
+            users.append(person.username)
 def score_board():
-    scoreDict = []
-    score = models.Person.query.order_by(models.Person.score.desc()).all()
+    scoreDict = {}
+    score = models.Person.query.order_by(models.Person.score).all()
     for s in score:
-        scoreDict.append({s.username:s.score})
-    #sorted_d=dict(sorted(scoreDict.items(),key=operator.itemgetter(1),reverse=True))
+        scoreDict[s.username] = s.score
+    sorted_d=dict(sorted(scoreDict.items(),key=operator.itemgetter(1),reverse))
     print("score", scoreDict)
     return scoreDict
 
+@socketio.on('leaderboard')
+def leaderboard():
+    score = score_board()
+    socketio.emit('leaderboard', score, broadcast=True, include_self=False)
 
 @socketio.on('login')
 def on_login(data): # data is whatever arg you pass in your emit call on client
-    print("User loggedin",str(data))
+    print(str(data))
     add_db(data)
     if "X" not in userNames:
         userNames["X"] = data["setUser"]
@@ -108,11 +114,10 @@ def on_login(data): # data is whatever arg you pass in your emit call on client
         userList.append(data["setUser"])
         userNames["spec"] = userList
     print(userNames)
-    score = score_board()
-    socketio.emit('resetStats', score, broadcast=True, include_self=False )
-    
     socketio.emit('login', userNames, broadcast=True, include_self=False)
-    
+    # This emits the 'chat' event from the server to all clients except for
+    # the client that emmitted the event that triggered this function
+    #socketio.emit('login', userList, broadcast=True, include_self=False)
 
 # Note we need to add this line so we can import app in the python shell
 @socketio.on('resetStats')

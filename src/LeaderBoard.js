@@ -1,23 +1,20 @@
 import React from 'react';
 import './Board.css';
 import io from 'socket.io-client';
-import { useState, useRef, useEffect} from 'react';
 const socket = io(); // Connects to socket connection
-export function LeaderBoard()
+export function LeaderBoard({lead})
 {
-    const [lead,setLead] = useState({});
-    useEffect(() => {
-    socket.on('resetStats', (data) => {
-      console.log('leaderboard event received!');
-      console.log(data);
-      setLead(data);
-        });
-     socket.on('leaderboard', (data) => {
-      console.log('leaderboard event received!');
-      console.log(data);
-      setLead(data);
-        });
-    }, []);
+    console.log(lead)
+    // lead.map((item)=>{
+    //     Object.keys(item).map(keys => {
+    //         console.log(keys), console.log({item[keys]}
+    //         ) } ) } )
+    lead.map((item) =>{
+        Object.keys(item).map(score =>{
+            console.log(score)
+            console.log(item[score])
+        })
+    })        
     return (       
     <div class="txtLeft">
         <table>
@@ -27,7 +24,7 @@ export function LeaderBoard()
                    </tr>
                    </thead>
                    <tbody>
-                          {Object.keys(lead).map(keys => <tr><td> {keys}</td> <td>{lead[keys]}</td> </tr>)}
+                   {lead.map((item)=>Object.keys(item).map(keys => <tr><td> {keys}</td> <td>{item[keys]}</td> </tr>))}
                     </tbody>
         </table>
         </div>

@@ -15,7 +15,8 @@ export function Board({tempUser}) {
     let [user, setUser] = useState({ "X": "", "O": "", "spec": [] })
     //const to checl the state.
     const [state2, setState2] = useState(1);
-    const [check,setcheck]=useState(true);
+    const [check,setcheck]=useState(false);
+    const [lead,setLead] = useState();
 
     //onclick button function
     function onClickButton(index) {
@@ -131,6 +132,18 @@ export function Board({tempUser}) {
           setState2(0);
       }
         });
+        
+    socket.on('resetStats', (data) => {
+      console.log('resetStats event received!');
+      console.log(data);
+      setLead(data);
+        });
+        
+    //  socket.on('leaderboard', (data) => {
+    //   console.log('leaderboard event received!');
+    //   console.log(data);
+    //   setLead(data);
+       // });
 
         
 }, []);
@@ -186,11 +199,14 @@ export function Board({tempUser}) {
             {user['spec'].map((player, i) => <p class="txtspec">{player}</p>)}
         </div>
         
+        <div>
+         <button class= "hideButton"onClick={operation}>Hide</button>
         { check?
-         <div><LeaderBoard/></div>
+         <div><LeaderBoard lead={lead}/></div>
         :null
         }
-        <button class= "hideButton"onClick={operation}>Hide</button>
+       
+        </div>
         <div class="board">
             {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}
         </div>
