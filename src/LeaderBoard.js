@@ -14,7 +14,7 @@ export function LeaderBoard({lead,tempUser})
             </thead>
                    <tbody>
                     {lead.map((item)=>Object.keys(item).map(keys =>(tempUser===keys)?
-                        <tr><td class = "colortext"> {keys}</td> <td>{item[keys]}</td> </tr>:
+                        <tr class = "colortext"><td > {keys}</td> <td>{item[keys]}</td> </tr>:
                         <tr><td> {keys}</td> <td>{item[keys]}</td> </tr>
                         ))}
                   </tbody>

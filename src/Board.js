@@ -72,14 +72,12 @@ export function Board({tempUser}) {
             {
                  win=user["X"];
                  lose=user["O"]
-                 console.log("Winner for X is "+win);
-                 console.log("Loose for X is "+lose);
+
             }else
             {
                  win=user["O"];
                  lose=user["X"]
-                 console.log("Winner for o is "+win);
-                 console.log("Loose for o is "+lose);
+
             }
             socket.emit("resetStats",{setWin:win,setLose:lose});
             }
