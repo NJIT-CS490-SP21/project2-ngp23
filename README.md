@@ -2,9 +2,10 @@
 
 # Tic Tac Toe
 
-# Login username for the player
-## Player 1= user1
-## Player 2= user2
+# Login usernames of player who has access to the board
+
+## Player 1 = user1
+## Player 2 = user2
     
 ## Technology Used in this Milestone
   - We use the cloud 9 services on aws to priview and make updates on the file.
@@ -12,7 +13,7 @@
 ## Framework 
   - Frame work we used was react js and flask.
 
-## languages we used for coding M1 Python, HTML, CSS, reactJs
+## languages we used for coding M1 and M2 Python, HTML, CSS, reactJs
 
 ## User will need to install all the require libraries in order for project to work using the code bellow
   - `npm install`
@@ -40,10 +41,10 @@
   - type `python` in the project directory
   - `>>> from app import db`
   - `>>> import models`
-  - `>>> db.create_all()``
-  - `admin = models.Person(username='admin', score = 100)`
-  - `db.session.add(admin)`
-  - `db.session.commit()`
+  - `>>> db.create_all()`
+  - `>>> admin = models.Person(username='admin', score = 100)`
+  - `>>> db.session.add(admin)`
+  - `>>> db.session.commit()`
 
 ## How to run the APP on the computer
  - cd into the directory
@@ -58,6 +59,9 @@
   - Flask_Session
   - flask_socket.io
   - reactJs
+  - flask_cors
+  - flask_sqlalchemy
+  - dotenv
 
 ## Deploy to Heroku
  - Create a free account on heroku https://singup.heroku.com/login
