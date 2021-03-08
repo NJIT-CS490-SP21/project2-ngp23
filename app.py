@@ -110,7 +110,6 @@ def on_login(data): # data is whatever arg you pass in your emit call on client
     print(userNames)
     score = score_board()
     socketio.emit('resetStats', score, broadcast=True, include_self=False )
-    
     socketio.emit('login', userNames, broadcast=True, include_self=False)
     
 

@@ -1,7 +1,7 @@
 //imports all needed libraries
 import React from 'react';
 import './Board.css';
-import { useState, useRef, useEffect} from 'react';
+import { useState, useEffect} from 'react';
 import { BoardMake } from './BoardMake.js'
 import io from 'socket.io-client';
 import { Winner } from './Winner.js'
@@ -49,7 +49,7 @@ export function Board({tempUser}) {
             {
                 //O value is printed out
                 if(state2===0){
-                userClick [index] = "O";
+                userClick[index] = "O";
                 //changes the state to 1 for the x in next box
                 setState2(1);
                 setBoard(userClick);
@@ -67,8 +67,8 @@ export function Board({tempUser}) {
         //else{alert("Invalid box")}
             const winner = Winner(userClick);
             console.log(winner)
-            if(winner&& winner!='draw'){     
-            if("X"== winner)
+            if(winner&& winner!=='draw'){     
+            if("X"=== winner)
             {
                  win=user["X"];
                  lose=user["O"]
@@ -178,29 +178,28 @@ export function Board({tempUser}) {
         //renders to the BoardMake.js 
         <div>
             <p class ="txtNext" >{status}<br/></p>
-        <div>
-            <center>{tempUser===user["X"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
-            <center>{tempUser===user["O"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
-        </div>
-        <div class = "txt">
-            <h2 class="txtplayer">Player username </h2>
-            <p class="txtplayer">Player X is : {user["X"]}</p>
-            <p class="txtplayer">Player O is : {user["O"]}</p>
-            <p class= "txtspec">Spectators</p>
-            {user['spec'].map((player, i) => <p class="txtspec">{player}</p>)}
-        </div>
+            <div>
+                <center>{tempUser===user["X"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
+                <center>{tempUser===user["O"] && <button class ="buttonR" onClick={reset} type="button">reset</button>}</center>
+            </div>
+            <div class = "txt">
+                <h2 class="txtplayer">Player username </h2>
+                <p class="txtplayer">Player X is : {user["X"]}</p>
+                <p class="txtplayer">Player O is : {user["O"]}</p>
+                <p class= "txtspec">Spectators</p>
+                {user['spec'].map((player, i) => <p class="txtspec">{player}</p>)}
+            </div>
         
-        <div>
-         <button class= "hideButton"onClick={operation}>Hide</button>
-        { check?
-         <div><LeaderBoard lead={lead} tempUser={tempUser}/></div>
-        :null
-        }
-        </div>
-        <div class="board">
-            {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}
-        </div>
-        
+            <div>
+                <button class= "hideButton"onClick={operation}>Click to Hide</button>
+                { check?
+                <div><LeaderBoard lead={lead} tempUser={tempUser}/></div>
+                :null
+                }
+            </div>
+            <div class="board">
+                {board.map((item,index)=><BoardMake onClickButton = {()=>onClickButton(index)} item={item}/>)}
+            </div>
         </div>
         );
     

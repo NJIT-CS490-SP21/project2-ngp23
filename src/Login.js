@@ -1,6 +1,5 @@
 import React from 'react';
-import {ListItem} from './ListItem';
-import {useState, useRef} from 'react';
+import {useRef} from 'react';
 import './Board.css';
 
 export function Login({login})
