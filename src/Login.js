@@ -1,17 +1,20 @@
-import React from 'react';
-import {useRef} from 'react';
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import './Board.css';
 
-export function Login({login})
-{
-    let user = useRef(null);
-    return (
-        <div>
-       <center>
-            <input ref = {user} type="text"/>
-            <button onClick= {()=>login(user.current.value)}>Enter</button>
-       </center>
-        </div>
-        );
-
+function Login({ login }) {
+  const user = useRef(null);
+  return (
+    <div>
+      <center>
+        <input ref={user} type="text" />
+        <button onClick={() => login(user.current.value)} type="submit">Enter</button>
+      </center>
+    </div>
+  );
 }
+Login.propTypes = {
+  login: PropTypes.string.isRequired,
+};
+
+export default Login;
