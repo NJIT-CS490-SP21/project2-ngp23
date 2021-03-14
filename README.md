@@ -2,7 +2,7 @@
 
 # Tic Tac Toe
 
-# Login usernames of player who has access to the board
+# Login usernames 
 
 ## Player 1 = user1
 ## Player 2 = user2
@@ -75,7 +75,8 @@
  - Now add the addons for datbase heroku `heroku addons:create heroku-postgresql:hobby-dev`
  - If finish all the previous steps follow the section **Initialize the database**.
  - Now we need to create buildpacks run `heroku buildpacks:add --index 1 heroku/nodejs`
- - do `git push heroku milestone_2:main` what is does is that it will push you repo to the heroku's repo.
+ - do `git push heroku main` what is does is that it will push you repo to the heroku's repo.
+ - Need to go to the heroku dashboard and turn on continous deployment
  - once its push you can do `heroku open` which will give you link to open the application.
  - Now app should open without any problem.
 

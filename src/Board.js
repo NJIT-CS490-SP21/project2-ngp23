@@ -25,7 +25,10 @@ function Board({ tempUser }) {
     let lose;
     const userClick = [...board];
     // If statement checks if the box is empty or not if empty then only procide.
-    if (Winner(board)) { alert('Already one winner, reset the game to play.'); return; }
+    if (Winner(board)) {
+      alert('Already one winner, reset the game to play.');
+      return;
+    }
     if (!userClick[index]) {
       if (tempUser === user.X) {
         // if state is 1 then its gives X as value
@@ -50,7 +53,9 @@ function Board({ tempUser }) {
         } else {
           alert('wait for your turn');
         }
-      } else { alert('Game in progress!'); }
+      } else {
+        alert('Game in progress!');
+      }
     }
     // else{alert("Invalid box")}
     const winner = Winner(userClick);
@@ -77,8 +82,9 @@ function Board({ tempUser }) {
       }
     });
     socket.on('login', (login) => {
-      Object.keys(login).map((item) => setUser((prev) => (
-        { ...prev, [item]: login[item] })));
+      Object.keys(login).map((item) =>
+        setUser((prev) => ({ ...prev, [item]: login[item] }))
+      );
     });
 
     socket.on('reset', (data) => {
@@ -103,7 +109,7 @@ function Board({ tempUser }) {
   } else if (winner && winner === 'draw') {
     status = ' No winner game draw';
   } else {
-    status = `Next Player: ${(state2 === 1) ? 'X' : 'O'}`;
+    status = `Next Player: ${state2 === 1 ? 'X' : 'O'}`;
   }
 
   const reset = () => {
@@ -117,48 +123,56 @@ function Board({ tempUser }) {
     }
     socket.emit('reset', { userClick, setState2: state2 });
   };
-  const operation = () => { setcheck(!check); };
+  const operation = () => {
+    setcheck(!check);
+  };
 
   return (
-  // renders to the BoardMake.js
+    // renders to the BoardMake.js
     <div>
       <p className="txtNext">
         {status}
         <br />
       </p>
       <div>
-        <center>{tempUser === user.X && <button className="buttonR" onClick={reset} type="button">reset</button>}</center>
-        <center>{tempUser === user.O && <button className="buttonR" onClick={reset} type="button">reset</button>}</center>
+        <center>
+          {tempUser === user.X && (
+            <button className="buttonR" onClick={reset} type="button">
+              reset
+            </button>
+          )}
+        </center>
+        <center>
+          {tempUser === user.O && (
+            <button className="buttonR" onClick={reset} type="button">
+              reset
+            </button>
+          )}
+        </center>
       </div>
       <div className="txt">
         <h2 className="txtplayer">Player username </h2>
-        <p className="txtplayer">
-          Player X is :
-          {user.X}
-        </p>
-        <p className="txtplayer">
-          Player O is :
-          {user.O}
-        </p>
+        <p className="txtplayer">Player X is :{user.X}</p>
+        <p className="txtplayer">Player O is :{user.O}</p>
         <p className="txtspec">Spectators</p>
-        {user.spec.map((player) => <p className="txtspec">{player}</p>)}
+        {user.spec.map((player) => (
+          <p className="txtspec">{player}</p>
+        ))}
       </div>
 
       <div>
-        <button className="hideButton" type="submit" onClick={operation}>Click to Hide</button>
-        { check
-          ? <div><LeaderBoard lead={lead} tempUser={tempUser} /></div>
-          : null}
+        <button className="hideButton" type="submit" onClick={operation}>
+          Click to Hide
+        </button>
+        {check ? (
+          <div>
+            <LeaderBoard lead={lead} tempUser={tempUser} />
+          </div>
+        ) : null}
       </div>
       <div className="board">
         {board.map((item, index) => (
-          <BoardMake
-            onClickButton={
-            () => onClickButton(index)
-
-        }
-            item={item}
-          />
+          <BoardMake onClickButton={() => onClickButton(index)} item={item} />
         ))}
       </div>
     </div>

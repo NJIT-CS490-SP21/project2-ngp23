@@ -8,13 +8,15 @@ function Login({ login }) {
     <div>
       <center>
         <input ref={user} type="text" />
-        <button onClick={() => login(user.current.value)} type="submit">Enter</button>
+        <button onClick={() => login(user.current.value)} type="submit">
+          Enter
+        </button>
       </center>
     </div>
   );
 }
 Login.propTypes = {
-  login: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 export default Login;

@@ -76,20 +76,21 @@ def on_click(
     '''Listens for click event which updates the board
      if the event occurs it emits back to the client'''
     print(str(data))
-    # This emits the 'chat' event from the server to all clients except for
+    # This emits the 'click' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
     socketio.emit('click', data, broadcast=True, include_self=False)
 
 
 @socketio.on('reset')
-def on_reset(
-        data):  # data is whatever arg you pass in your emit call on client
+def on_reset(data):  # data is whatever arg you pass in your emit call on client
     '''Event listner for reset function for the board'''
     print(str(data))
-    # This emits the 'chat' event from the server to all clients except for
+    # This emits the 'reset' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
     socketio.emit('reset', data, broadcast=True, include_self=False)
 
+def reset(data):
+    return data
 
 #helper function
 def add_db(data):  # data is whatever arg you pass in your emit call on client
@@ -138,7 +139,7 @@ def login(data):
         USERNAMES["X"] = data["setUser"]
     elif "O" not in USERNAMES:
         USERNAMES["O"] = data["setUser"]
-    else:
+    elif data["setUser"] not in (USERLIST,USERNAMES['X'],USERNAMES['O']):
         USERLIST.append(data["setUser"])
         USERNAMES["spec"] = USERLIST
     return USERNAMES

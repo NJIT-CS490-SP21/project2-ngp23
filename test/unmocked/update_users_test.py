@@ -1,11 +1,10 @@
 '''
     update_users_test.py
     
-    Fill in what this test is for here
+    This test check if the user is correctly entering the data or not
 '''
 
 import unittest
-#from update_users import add_user
 import sys
 import os
 
@@ -27,7 +26,7 @@ class UpdateUserTestCase(unittest.TestCase):
                 }
             },
             {
-                    USERS_INPUT: {
+                USERS_INPUT: {
                     'setUser': "User2"
                 },
                 EXPECTED_OUTPUT: {
@@ -44,45 +43,59 @@ class UpdateUserTestCase(unittest.TestCase):
                     'setUser': "User1"
                 },
                 EXPECTED_OUTPUT: {
-                    'X': None
+                    'X': ""
                 }
             },
             {
-                    USERS_INPUT: {
+                USERS_INPUT: {
                     'setUser': "User2"
                 },
                 EXPECTED_OUTPUT: {
                     'X': "User2",
-                    'O': None
+                    'O': ""
                 }
                 
             }
           
         ]
-        
+        self.failure_test_params2 = [
+            {
+                USERS_INPUT: {
+                    'setUser': "User2"
+                },
+                EXPECTED_OUTPUT: {
+                    'X':"",
+                    'O':"",
+                    'spec':[]
+
+                }
+            },
+        ]
+
     def test_add_user(self):
         for test in self.success_test_params:
-            # TODO: Make a call to add user with your test inputs
-            # then assign it to a variable. Look at split_test for example
             actual_result = loginfile.login(test[USERS_INPUT])
-            # TODO: Assign the expected output as a variable from test
             expected_result = test[EXPECTED_OUTPUT]
-
-            # TODO: Use assert checks to see compare values of the results
             self.assertEqual(actual_result,expected_result)
             self.assertEqual(actual_result['X'],expected_result['X'])
+        print(actual_result)
+        print(expected_result)
     
     def test_add_userfail(self):
         for test in self.failure_test_params:
-            # TODO: Make a call to add user with your test inputs
-            # then assign it to a variable. Look at split_test for example
             actual_result = loginfile.login(test[USERS_INPUT])
-            # TODO: Assign the expected output as a variable from test
             expected_result = test[EXPECTED_OUTPUT]
-
-            # TODO: Use assert checks to see compare values of the results
             self.assertNotEqual(actual_result,expected_result)
             self.assertNotEqual(actual_result['X'],expected_result['X'])
+        print(actual_result)
+        print(expected_result)
+    def test_add_userfail2(self):
+        for test in self.failure_test_params2:
+            actual_result = loginfile.login(test[USERS_INPUT])
+            expected_result = test[EXPECTED_OUTPUT]
+            self.assertNotEqual(actual_result,expected_result)
+        print(actual_result)
+        print(expected_result)          
 
 if __name__ == '__main__':
     unittest.main()
