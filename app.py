@@ -133,6 +133,15 @@ def on_login(
     socketio.emit('resetStats', score, broadcast=True, include_self=False)
     socketio.emit('login', USERNAMES, broadcast=True, include_self=False)
 
+def login(data):
+    if "X" not in USERNAMES:
+        USERNAMES["X"] = data["setUser"]
+    elif "O" not in USERNAMES:
+        USERNAMES["O"] = data["setUser"]
+    else:
+        USERLIST.append(data["setUser"])
+        USERNAMES["spec"] = USERLIST
+    return USERNAMES
 
 # Note we need to add this line so we can import app in the python shell
 @socketio.on('resetStats')
