@@ -16,19 +16,27 @@ function LeaderBoard({ lead, tempUser }) {
           </tr>
         </thead>
         <tbody>
-          {lead.map((item) =>
-            Object.keys(item).map((keys) =>
-              tempUser === keys ? (
-                <tr className="colortext">
-                  <td> {keys}</td> <td>{item[keys]}</td>{' '}
-                </tr>
-              ) : (
-                <tr>
-                  <td> {keys}</td> <td>{item[keys]}</td>{' '}
-                </tr>
-              )
-            )
-          )}
+          {lead.map((item) => Object.keys(item).map((keys) => (tempUser === keys ? (
+            <tr className="colortext">
+              <td>
+                {' '}
+                {keys}
+              </td>
+              {' '}
+              <td>{item[keys]}</td>
+              {' '}
+            </tr>
+          ) : (
+            <tr>
+              <td>
+                {' '}
+                {keys}
+              </td>
+              {' '}
+              <td>{item[keys]}</td>
+              {' '}
+            </tr>
+          ))))}
         </tbody>
       </table>
     </div>

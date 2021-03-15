@@ -28,7 +28,10 @@ function App() {
   }
   return (
     <div>
-      <p className="txtNext">Your user Name is :{tempUser}</p>
+      <p className="txtNext">
+        Your user Name is :
+        {tempUser}
+      </p>
       <Board tempUser={tempUser} />
     </div>
   );

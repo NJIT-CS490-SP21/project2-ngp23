@@ -82,9 +82,7 @@ function Board({ tempUser }) {
       }
     });
     socket.on('login', (login) => {
-      Object.keys(login).map((item) =>
-        setUser((prev) => ({ ...prev, [item]: login[item] }))
-      );
+      Object.keys(login).map((item) => setUser((prev) => ({ ...prev, [item]: login[item] })));
     });
 
     socket.on('reset', (data) => {
@@ -152,8 +150,14 @@ function Board({ tempUser }) {
       </div>
       <div className="txt">
         <h2 className="txtplayer">Player username </h2>
-        <p className="txtplayer">Player X is :{user.X}</p>
-        <p className="txtplayer">Player O is :{user.O}</p>
+        <p className="txtplayer">
+          Player X is :
+          {user.X}
+        </p>
+        <p className="txtplayer">
+          Player O is :
+          {user.O}
+        </p>
         <p className="txtspec">Spectators</p>
         {user.spec.map((player) => (
           <p className="txtspec">{player}</p>

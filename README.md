@@ -1,4 +1,4 @@
-# Project2-milestone_1
+# Project2-milestone_3
 
 # Tic Tac Toe
 
@@ -13,7 +13,7 @@
 ## Framework 
   - Frame work we used was react js and flask.
 
-## languages we used for coding M1 and M2 Python, HTML, CSS, reactJs
+## languages we used for coding M1, M2 and M3 Python, HTML, CSS, reactJs
 
 ## User will need to install all the require libraries in order for project to work using the code bellow
   - `npm install`
@@ -90,13 +90,19 @@
 
 
 ## What are known problem (Still existing), if any, with your project?
-  - If any player leaves the game it wouldnt reset the player names. If I had extra time I would have added a logout button so that it resets the players.
-  - Other known problem would be that there could be multiple players with the same name in the list which can cause confusion while giving an access. To fix this I would have created an some sort of an dictionary or list which avoids duplicate.
-  - The database only allows 20 connections which can cause too many connections error if the user passes the connection limit. To fix problem add the log out button which will destroy the connections which is not used also we can upgrade the membership.
+  - If any player leaves the game it wouldnt reset the player names. 
+       If I had extra time I would have added a logout button so that it resets the players.
+  - Other known problem would be that there could be multiple players with the same name in 
+        the list which can cause confusion while giving an access. To fix this I would have 
+        allow user to enter uniq name in session.
+  - The database only allows 20 connections which can cause too many connections error if the user passes 
+        the connection limit. To fix problem add the log out button which will destroy the connections which is 
+        not used also we can upgrade the membership.
  
 
 ## What would you do to improve you project in the future?
- - In project I would like to add the logout button so that any player wants to leave the game they can just press logout button and take out the player from the list and add spec to player list.
+ - In project I would like to add the logout button so that 
+        any player wants to leave the game they can just press logout button and take out the player from the list and add spec to player list.
  - Another imporovement I would like to make for this project is create rooms so that only people you share your room code can play with you.
  - I would also like to add a computer game where if there is no player two user can play with computer.
  

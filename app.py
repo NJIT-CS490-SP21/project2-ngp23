@@ -90,6 +90,7 @@ def on_reset(data):  # data is whatever arg you pass in your emit call on client
     socketio.emit('reset', data, broadcast=True, include_self=False)
 
 def reset(data):
+    '''Event listner for reset function for the board'''
     return data
 
 #helper function
