@@ -103,7 +103,6 @@ def add_db(data):  # data is whatever arg you pass in your emit call on client
         print(new_user)
         db.session.add(new_user)
         db.session.commit()
-        
 def add_db_test(data):  # data is whatever arg you pass in your emit call on client
     '''functions checks for the data in DB and if not in Db then add to db'''
     check = models.Person.query.filter_by(username=data["setUser"]).first()
@@ -146,11 +145,12 @@ def on_login(
     socketio.emit('login', USERNAMES, broadcast=True, include_self=False)
 
 def login(data):
+    '''mocked Functions listens for login event and asigns the X, O and spec'''
     if "X" not in USERNAMES:
         USERNAMES["X"] = data["setUser"]
     elif "O" not in USERNAMES:
         USERNAMES["O"] = data["setUser"]
-    elif data["setUser"] not in (USERLIST,USERNAMES['X'],USERNAMES['O']):
+    elif data["setUser"] not in (USERLIST, USERNAMES['X'], USERNAMES['O']):
         USERLIST.append(data["setUser"])
         USERNAMES["spec"] = USERLIST
     return USERNAMES
