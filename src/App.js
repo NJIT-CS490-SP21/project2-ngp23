@@ -15,7 +15,6 @@ function App() {
     islogin(() => !login);
 
     socket.emit('login', { setUser: username });
-
     socket.emit('leaderboard');
   };
   if (!login && tempUser === '') {

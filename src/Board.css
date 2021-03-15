@@ -73,6 +73,15 @@
   background-color: white;
   margin: auto;
 }
+.chatButton {
+  height: 40px;
+  width: 130px;
+  color: black;
+  font-size: 15px;
+  background-color: white;
+  margin:auto;
+
+}
 
 table,
 td {
@@ -88,4 +97,7 @@ tfoot {
 .colortext {
   background-color: lightblue;
   color: black;
+}
+.chat{
+  color: white;
 }

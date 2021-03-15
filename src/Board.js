@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 import BoardMake from './BoardMake';
 import Winner from './Winner';
 import LeaderBoard from './LeaderBoard';
+import ChatBox from './ChatBox';
 
 const socket = io(); // Connects to socket connection
 function Board({ tempUser }) {
@@ -15,6 +16,7 @@ function Board({ tempUser }) {
   // const to checl the state.
   const [state2, setState2] = useState(1);
   const [check, setcheck] = useState(true);
+  const [chat, setchat] = useState(false);
   const [lead, setLead] = useState([]);
 
   // onclick button function
@@ -124,6 +126,9 @@ function Board({ tempUser }) {
   const operation = () => {
     setcheck(!check);
   };
+  const chatOperation = () => {
+    setchat(!chat);
+  };
 
   return (
     // renders to the BoardMake.js
@@ -178,6 +183,18 @@ function Board({ tempUser }) {
         {board.map((item, index) => (
           <BoardMake onClickButton={() => onClickButton(index)} item={item} />
         ))}
+      </div>
+      <div>
+        <div>
+          <button className="chat" type="submit" onClick={chatOperation}>
+            Click to chat
+          </button>
+          {chat ? (
+            <div>
+              <ChatBox />
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );
