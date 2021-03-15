@@ -14,8 +14,8 @@ function Board({ tempUser }) {
   const [user, setUser] = useState({ X: '', O: '', spec: [] });
   // const to checl the state.
   const [state2, setState2] = useState(1);
-  const [check, setcheck] = useState(false);
-  const [lead, setLead] = useState();
+  const [check, setcheck] = useState(true);
+  const [lead, setLead] = useState([]);
 
   // onclick button function
   function onClickButton(index) {
@@ -136,14 +136,14 @@ function Board({ tempUser }) {
         <center>
           {tempUser === user.X && (
             <button className="buttonR" onClick={reset} type="button">
-              reset
+              Reset
             </button>
           )}
         </center>
         <center>
           {tempUser === user.O && (
             <button className="buttonR" onClick={reset} type="button">
-              reset
+              Reset
             </button>
           )}
         </center>

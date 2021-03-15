@@ -5,8 +5,8 @@ import os
 import sys
 
 sys.path.append(os.path.abspath('../../'))
-from app import add_user
-from models import Person
+from app import add_db_test
+import models 
 
 KEY_INPUT = "input"
 KEY_EXPECTED = "expected"
@@ -17,8 +17,8 @@ class AddUserTestCase(unittest.TestCase):
     def setUp(self):
         self.success_test_params = [
             {
-                KEY_INPUT: 'naman',
-                KEY_EXPECTED: [INITIAL_USERNAME, 'naman'],
+                KEY_INPUT: {'username':'user2'},
+                KEY_EXPECTED: [INITIAL_USERNAME, 'user2'],
             },
         ]
         
@@ -42,7 +42,7 @@ class AddUserTestCase(unittest.TestCase):
                         mocked_query.all = self.mocked_person_query_all
     
                         print(self.initial_db_mock)
-                        actual_result = add_user(test[KEY_INPUT])
+                        actual_result = add_db_test(test[KEY_INPUT])
                         print(actual_result)
                         expected_result = test[KEY_EXPECTED]
                         print(self.initial_db_mock)
