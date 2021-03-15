@@ -7,7 +7,7 @@ import ChatBox from './ChatBox';
 
 test('click on the hide button', () => {
   const result = render(<Board tempUser="user1" />);
-  const joinButtonElement = screen.getByText('Click to Hide');
+  const joinButtonElement = screen.getByText('Click to Hide Score');
   expect(joinButtonElement).toBeInTheDocument();
   const joinButtonElement2 = screen.getByText('ScoreBoard');
   fireEvent.click(joinButtonElement);

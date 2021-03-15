@@ -105,11 +105,11 @@ def add_db(data):  # data is whatever arg you pass in your emit call on client
         db.session.commit()
 def add_db_test(data):  # data is whatever arg you pass in your emit call on client
     '''functions checks for the data in DB and if not in Db then add to db'''
-    new_user=models.Person(username=data['setUser'],score=100)
+    new_user = models.Person(username=data['setUser'], score=100)
     db.session.add(new_user)
     db.session.commit()
-    all_people=models.Person.query.all()
-    users=[]
+    all_people = models.Person.query.all()
+    users = []
     for person in all_people:
         users.append(person.username)
     return users

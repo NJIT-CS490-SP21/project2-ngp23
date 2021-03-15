@@ -168,10 +168,9 @@ function Board({ tempUser }) {
           <p className="txtspec">{player}</p>
         ))}
       </div>
-
       <div>
         <button className="hideButton" type="submit" onClick={operation}>
-          Click to Hide
+          Click to Hide Score
         </button>
         {check ? (
           <div>
