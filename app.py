@@ -89,7 +89,7 @@ def on_reset(data):  # data is whatever arg you pass in your emit call on client
     # the client that emmitted the event that triggered this function
     socketio.emit('reset', data, broadcast=True, include_self=False)
 
-def reset(data):
+def click(data):
     '''Event listner for reset function for the board'''
     return data
 
@@ -105,13 +105,14 @@ def add_db(data):  # data is whatever arg you pass in your emit call on client
         db.session.commit()
 def add_db_test(data):  # data is whatever arg you pass in your emit call on client
     '''functions checks for the data in DB and if not in Db then add to db'''
-    check = models.Person.query.filter_by(username=data["setUser"]).first()
-    print(check)
-    if check is None:
-        new_user = models.Person(username=data["setUser"], score=100)
-        print(new_user)
-        db.session.add(new_user)
-        db.session.commit()
+    new_user=models.Person(username=data['setUser'],score=100)
+    db.session.add(new_user)
+    db.session.commit()
+    all_people=models.Person.query.all()
+    users=[]
+    for person in all_people:
+        users.append(person.username)
+    return users
 
 
 def score_board():

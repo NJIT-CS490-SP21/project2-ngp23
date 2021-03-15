@@ -1,6 +1,5 @@
 '''
     update_users_test.py
-    
     This test check if the user is correctly entering the data or not
 '''
 
@@ -15,66 +14,60 @@ USERS_INPUT = 'users'
 EXPECTED_OUTPUT = "expected"
 
 class UpdateUserTestCase(unittest.TestCase):
+    '''Test class for the update user'''
     def setUp(self):
         self.success_test_params = [
             {
                 USERS_INPUT: [
-                    'X','O'
+                    'X', 'O'
                 ],
                 EXPECTED_OUTPUT: [
-                    'X','O'
+                    'X', 'O'
                 ]
-            },
-          
-        ]
+            },]
         self.failure_test_params = [
             {
                 USERS_INPUT: [
-                    'X','X'
-                ],
+                    'X', 'X'],
                 EXPECTED_OUTPUT: [
-                    'X',' '
+                    'X', ' '
                 ]
-            },
-          
-        ]
+            },]
         self.failure_test_params2 = [
             {
                 USERS_INPUT: [
-                    'X','X','0'
+                    'X', 'X', '0'
                 ],
-                EXPECTED_OUTPUT: [
-                    
-                ]
-            },
-          
-        ]
+                EXPECTED_OUTPUT: []
+            },]
 
     def test_add_user(self):
+        '''success unmocked test'''
         for test in self.success_test_params:
-            actual_result = loginfile.reset(test[USERS_INPUT])
+            actual_result = loginfile.click(test[USERS_INPUT])
             expected_result = test[EXPECTED_OUTPUT]
-            self.assertEqual(actual_result,expected_result)
+            self.assertEqual(actual_result, expected_result)
             #self.assertEqual(actual_result['X'],expected_result['X'])
         print(actual_result)
         print(expected_result)
     def test_add_userfailure(self):
+        '''Failure unmocked test'''
         for test in self.failure_test_params:
-            actual_result = loginfile.reset(test[USERS_INPUT])
+            actual_result = loginfile.click(test[USERS_INPUT])
             expected_result = test[EXPECTED_OUTPUT]
-            self.assertNotEqual(actual_result,expected_result)
+            self.assertNotEqual(actual_result, expected_result)
             #self.assertEqual(actual_result['X'],expected_result['X'])
         print(actual_result)
         print(expected_result)
     def test_add_userfailure2(self):
+        '''Failure2 unmocked test'''
         for test in self.failure_test_params2:
-            actual_result = loginfile.reset(test[USERS_INPUT])
+            actual_result = loginfile.click(test[USERS_INPUT])
             expected_result = test[EXPECTED_OUTPUT]
-            self.assertNotEqual(actual_result,expected_result)
+            self.assertNotEqual(actual_result, expected_result)
             #self.assertEqual(actual_result['X'],expected_result['X'])
         print(actual_result)
         print(expected_result)
-    
-
 if __name__ == '__main__':
     unittest.main()
+    

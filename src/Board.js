@@ -187,7 +187,7 @@ function Board({ tempUser }) {
       <div>
         <div>
           <button className="chatButton" type="submit" onClick={chatOperation}>
-            Click to chat
+            Click to Hide chat
           </button>
           {chat ? (
             <div>

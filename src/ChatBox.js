@@ -16,7 +16,6 @@ function ChatBox() {
   }
   useEffect(() => {
     socket.on('chat', (data) => {
-      console.log(data);
       setMessage((prevMessage) => [...prevMessage, data.messages]);
     });
   }, []);
@@ -24,10 +23,13 @@ function ChatBox() {
     <div>
       <h2 className="chattxt">Chat Box</h2>
       <input className="chat" type="text" ref={inputRef} />
-      <button className="send" type="submit" onClick={onClickButton}>send</button>
+      <button className="send" type="submit" onClick={onClickButton}>
+        send
+      </button>
       <ul>
-        {messages.map((item, index) => <ListItem key={index} name={item} />)}
-
+        {messages.map((item, index) => (
+          <ListItem key={index} name={item} />
+        ))}
       </ul>
     </div>
   );

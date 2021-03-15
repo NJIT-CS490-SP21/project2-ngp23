@@ -31,6 +31,7 @@ function App() {
         Your user Name is :
         {tempUser}
       </p>
+
       <Board tempUser={tempUser} />
     </div>
   );

@@ -90,7 +90,6 @@
   left: 80%;
   -ms-transform: translate(-50%, -30%);
   transform: translate(-50%, -30%);
-
 }
 
 table,
@@ -108,31 +107,31 @@ tfoot {
   background-color: lightblue;
   color: black;
 }
-.chattxt{
-  font-size:30px;
-  color: white ;
-  margin:0;
+.chattxt {
+  font-size: 30px;
+  color: white;
+  margin: 0;
   position: absolute;
   top: 60%;
   left: 75%;
   -ms-transform: translate(-50%, -30%);
   transform: translate(-50%, -30%);
 }
-.chat{
-  font-size:20px;
-  color: white ;
-  margin:0;
+.chat {
+  font-size: 20px;
+  color: white;
+  margin: 0;
   position: absolute;
   top: 65%;
   left: 75%;
   -ms-transform: translate(-50%, -30%);
   transform: translate(-50%, -30%);
 }
-.send{
-  font-size:20px;
-  color: white ;
-  background-color:black;
-  margin:0;
+.send {
+  font-size: 20px;
+  color: white;
+  background-color: black;
+  margin: 0;
   position: absolute;
   top: 65%;
   left: 84.5%;

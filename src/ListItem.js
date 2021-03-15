@@ -5,7 +5,7 @@ function ListItem({ name }) {
   return (
     <li className="chat">
       {' '}
-      { name }
+      {name}
     </li>
   );
 }
