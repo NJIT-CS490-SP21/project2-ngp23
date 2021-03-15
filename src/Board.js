@@ -16,7 +16,7 @@ function Board({ tempUser }) {
   // const to checl the state.
   const [state2, setState2] = useState(1);
   const [check, setcheck] = useState(true);
-  const [chat, setchat] = useState(false);
+  const [chat, setchat] = useState(true);
   const [lead, setLead] = useState([]);
 
   // onclick button function
@@ -186,7 +186,7 @@ function Board({ tempUser }) {
       </div>
       <div>
         <div>
-          <button className="chat" type="submit" onClick={chatOperation}>
+          <button className="chatButton" type="submit" onClick={chatOperation}>
             Click to chat
           </button>
           {chat ? (

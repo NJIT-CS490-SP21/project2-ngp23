@@ -1,7 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+
 import App from './App';
 import Board from './Board';
 import Login from './Login';
+import ChatBox from './ChatBox';
 
 test('click on the hide button', () => {
   const result = render(<Board tempUser="user1" />);
@@ -21,3 +23,23 @@ test('Click on the login button', () => {
   fireEvent.click(joinButtonElement);
   expect(joinButtonElement2).toBeValid();
 });
+
+test('Click send button', () => {
+  const result = render(<ChatBox />);
+  const joinButtonElement = screen.getByText('send');
+  expect(joinButtonElement).toBeInTheDocument();
+  const joinButtonElement2 = screen.getByText('send');
+  fireEvent.click(joinButtonElement);
+  expect(joinButtonElement2).toBeValid();
+});
+
+test('click on the hide button', () => {
+  const result = render(<Board tempUser="user1" />);
+  const joinButtonElement = screen.getByText('Click to chat');
+
+  expect(joinButtonElement).toBeInTheDocument();
+  const joinButtonElement2 = screen.getByText('Chat Box');
+  fireEvent.click(joinButtonElement);
+  expect(joinButtonElement2).not.toBeInTheDocument();
+});
+

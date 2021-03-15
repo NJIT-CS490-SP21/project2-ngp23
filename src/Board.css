@@ -66,20 +66,30 @@
   font-size: 20px;
 }
 .hideButton {
-  height: 40px;
-  width: 130px;
+  height: 30px;
+  width: 125px;
   color: black;
   font-size: 15px;
   background-color: white;
-  margin: auto;
+  margin: 0;
+  position: absolute;
+  top: 9%;
+  left: 66.5%;
+  -ms-transform: translate(-50%, -30%);
+  transform: translate(-50%, -30%);
 }
 .chatButton {
-  height: 40px;
-  width: 130px;
+  height: 30px;
+  width: 140px;
   color: black;
   font-size: 15px;
   background-color: white;
-  margin:auto;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 80%;
+  -ms-transform: translate(-50%, -30%);
+  transform: translate(-50%, -30%);
 
 }
 
@@ -98,8 +108,34 @@ tfoot {
   background-color: lightblue;
   color: black;
 }
-.chat{
-  font-size:10px;
+.chattxt{
+  font-size:30px;
   color: white ;
-  
+  margin:0;
+  position: absolute;
+  top: 60%;
+  left: 75%;
+  -ms-transform: translate(-50%, -30%);
+  transform: translate(-50%, -30%);
+}
+.chat{
+  font-size:20px;
+  color: white ;
+  margin:0;
+  position: absolute;
+  top: 65%;
+  left: 75%;
+  -ms-transform: translate(-50%, -30%);
+  transform: translate(-50%, -30%);
+}
+.send{
+  font-size:20px;
+  color: white ;
+  background-color:black;
+  margin:0;
+  position: absolute;
+  top: 65%;
+  left: 84.5%;
+  -ms-transform: translate(-50%, -30%);
+  transform: translate(-50%, -30%);
 }

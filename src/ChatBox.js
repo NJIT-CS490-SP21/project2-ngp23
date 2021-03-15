@@ -22,9 +22,9 @@ function ChatBox() {
   }, []);
   return (
     <div>
-      <h2 className="chat">Chat Box</h2>
-      <input type="text" ref={inputRef} />
-      <button type="submit" onClick={onClickButton}>send</button>
+      <h2 className="chattxt">Chat Box</h2>
+      <input className="chat" type="text" ref={inputRef} />
+      <button className="send" type="submit" onClick={onClickButton}>send</button>
       <ul>
         {messages.map((item, index) => <ListItem key={index} name={item} />)}
 
