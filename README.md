@@ -1,7 +1,7 @@
 # Project2-milestone_3
 
 # Tic Tac Toe
-
+# Link to game: https://polar-harbor-37857.herokuapp.com/
 # Login usernames
 
 ## Player 1 = user1
